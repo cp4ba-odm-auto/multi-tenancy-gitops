@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-instance
+  name: cp4a-db2-instance
   annotations:
     argocd.argoproj.io/sync-wave: "250"
   labels:
-    gitops.tier.group: cntk
+    gitops.tier.group: db2
     gitops.tier.layer: services
     gitops.tier.source: git
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: tools
-    server: https://kubernetes.default.svc
+    namespace: db2
+    server: 'https://kubernetes.default.svc'
   project: services
   source:
-    path: instances/influxdb-grafana
+    path: instances/cp4a-db2-instance
   syncPolicy:
     automated:
       prune: true

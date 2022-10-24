@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-instance
+  name: ibm-cp4a-odm
   annotations:
-    argocd.argoproj.io/sync-wave: "250"
+    argocd.argoproj.io/sync-wave: "280"
   labels:
-    gitops.tier.group: cntk
+    gitops.tier.group: cp4a
     gitops.tier.layer: services
     gitops.tier.source: git
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: tools
+    namespace: cp4a
     server: 'https://kubernetes.default.svc'
   project: services
   source:
-    path: instances/cert-manager
+    path: instances/cp4a-odm
   syncPolicy:
     automated:
       prune: true

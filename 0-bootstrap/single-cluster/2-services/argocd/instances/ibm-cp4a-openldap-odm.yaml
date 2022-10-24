@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: pact-broker
+  name: ibm-cp4a-openldap-odm
   annotations:
-    argocd.argoproj.io/sync-wave: "250"
+    argocd.argoproj.io/sync-wave: "260"
   labels:
     gitops.tier.group: cntk
     gitops.tier.layer: services
@@ -12,25 +12,11 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: tools
+    namespace: openldap
     server: 'https://kubernetes.default.svc'
   project: services
   source:
-    path: instances/pact-broker
-    helm:
-      values: |
-        pact-broker:
-          database:
-            type: sqlite
-            name: pactbroker.sqlite
-
-          route:
-            enabled: true
-            termination: edge
-            insecure: Redirect
-
-          ingress:
-            enabled: false
+    path: instances/cp4a-openldap-odm
   syncPolicy:
     automated:
       prune: true
