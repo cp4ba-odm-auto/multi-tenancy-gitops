@@ -259,6 +259,12 @@ rules:
   - verbs:
       - '*'
     apiGroups:
+      - db2u.databases.ibm.com
+    resources:
+      - db2uclusters
+  - verbs:
+      - '*'
+    apiGroups:
       - mq.ibm.com
     resources:
       - queuemanagers
